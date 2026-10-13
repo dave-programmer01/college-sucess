@@ -6,7 +6,7 @@ import { pressable } from "@/lib/motion";
 
 const MotionLink = motion.create(Link);
 
-type Variant = "primary" | "soft" | "outline";
+type Variant = "primary" | "soft" | "outline" | "danger";
 
 type StyleProps = {
   variant?: Variant;
@@ -18,6 +18,7 @@ const variants: Record<Variant, string> = {
   primary: "bg-primary text-on-primary hover:bg-primary-hover",
   soft: "border border-brand/30 bg-primary-soft text-brand",
   outline: "border border-line bg-surface text-brand",
+  danger: "bg-danger text-white hover:bg-danger-hover",
 };
 
 function buttonClasses({ variant = "primary", fullWidth, className }: StyleProps) {

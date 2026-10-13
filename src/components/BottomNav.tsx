@@ -5,6 +5,7 @@ import { BookOpen, House, MapPin, User, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { pressable } from "@/lib/motion";
+import { useVisitKey } from "@/lib/use-visit-key";
 
 const MotionLink = motion.create(Link);
 
@@ -25,13 +26,14 @@ const tabs: Tab[] = [
 
 export function BottomNav() {
   const pathname = usePathname();
+  const visit = useVisitKey();
 
   return (
     <nav
       aria-label="Main"
       className="sticky bottom-0 z-30 border-t border-line bg-canvas/95 pb-[env(safe-area-inset-bottom)] backdrop-blur"
     >
-      <ul className="grid grid-cols-4">
+      <ul key={visit} className="grid grid-cols-4">
         {tabs.map(({ href, label, icon: Icon, alsoActiveOn }) => {
           const active = pathname === href || alsoActiveOn?.includes(pathname);
           return (

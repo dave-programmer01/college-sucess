@@ -26,12 +26,15 @@
   --on-primary: #ffffff;
   --brand: #0f766e; /* green text, icons, rings and progress fills */
 
-  --error: #ef4444;
+  --error: #ef4444; /* borders and icons */
+  --error-strong: #b91c1c; /* error text: #ef4444 is too light to read on white */
   --error-soft: #fef2f2;
+  --danger: #dc2626; /* filled destructive buttons, white text */
+  --danger-hover: #b91c1c;
   --star: #f59e0b;
   --flame: #f97316;
-  --locked: #e5e7eb; /* locked level node */
-  --locked-fg: #9ca3af;
+  --locked: #aab0bb; /* locked level node */
+  --locked-fg: #ffffff; /* number on a locked node */
   --overlay: rgb(15 23 42 / 0.5); /* scrim behind modals */
 
   --elevation-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
@@ -55,11 +58,14 @@
   --brand: #14b8a6;
 
   --error: #f87171;
+  --error-strong: #fca5a5;
   --error-soft: #3a1d24;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
   --star: #fbbf24;
   --flame: #fb923c;
-  --locked: #2b3648;
-  --locked-fg: #64748b;
+  --locked: #334155;
+  --locked-fg: #94a3b8;
   --overlay: rgb(2 6 23 / 0.7);
 
   --elevation-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
@@ -81,7 +87,10 @@
   --color-on-primary: var(--on-primary);
   --color-brand: var(--brand);
   --color-error: var(--error);
+  --color-error-strong: var(--error-strong);
   --color-error-soft: var(--error-soft);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
   --color-star: var(--star);
   --color-flame: var(--flame);
   --color-locked: var(--locked);
