@@ -33,6 +33,30 @@ export const pulse = {
 
 export const progressFill: Transition = { duration: 0.6, ease: "easeOut" };
 
+/** Quiz: a right answer pops, a wrong one gives a small sideways shake. */
+export const pop = {
+  scale: [1, 1.04, 1],
+  transition: { duration: 0.3, ease: "easeOut" } satisfies Transition,
+};
+
+export const shake = {
+  x: [0, -6, 6, -4, 4, 0],
+  transition: { duration: 0.35, ease: "easeInOut" } satisfies Transition,
+};
+
+/** A panel or card arriving: used by quiz feedback and the Level Complete card. */
+export const arrive = {
+  initial: { opacity: 0, scale: 0.92, y: 12 },
+  animate: { opacity: 1, scale: 1, y: 0 },
+  transition: { duration: 0.3, ease: "easeOut" } satisfies Transition,
+};
+
+export const starBounce = {
+  initial: { scale: 0, rotate: -25 },
+  animate: { scale: 1, rotate: 0 },
+  transition: { type: "spring", stiffness: 260, damping: 9, delay: 0.15 } satisfies Transition,
+};
+
 /** A level unlocking: the lock leaves and the node fills with colour. */
 export const unlock = {
   /** Wait for the path to finish staggering in before the unlock plays. */

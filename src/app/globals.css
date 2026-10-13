@@ -34,8 +34,8 @@
   --star: #f59e0b;
   --flame: #f97316;
   --locked: #aab0bb; /* locked level node */
-  --locked-fg: #ffffff; /* number on a locked node */
-  --overlay: rgb(15 23 42 / 0.5); /* scrim behind modals */
+  --locked-fg: #1f2937; /* number on a locked node, 6.7:1 on the grey */
+  --overlay: rgb(15 23 42 / 0.72); /* scrim behind modals; dark enough for white text on top */
 
   --elevation-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
   --elevation-raised: 0 2px 4px rgb(15 23 42 / 0.06), 0 10px 24px rgb(15 23 42 / 0.1);
@@ -65,7 +65,7 @@
   --star: #fbbf24;
   --flame: #fb923c;
   --locked: #334155;
-  --locked-fg: #94a3b8;
+  --locked-fg: #cbd5e1;
   --overlay: rgb(2 6 23 / 0.7);
 
   --elevation-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
@@ -137,6 +137,11 @@
   :focus-visible {
     outline: 2px solid var(--primary-light);
     outline-offset: 2px;
+  }
+
+  /* Keep the page behind an open modal from scrolling. */
+  html:has(dialog[open]) {
+    overflow: hidden;
   }
 
   /* Framer Motion handles its own animations; this covers CSS transitions. */
