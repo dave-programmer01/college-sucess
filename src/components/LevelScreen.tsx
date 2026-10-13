@@ -9,7 +9,9 @@ import { useProgress } from "@/lib/progress-context";
 import { Button } from "./Button";
 import { CheckBadge } from "./CheckBadge";
 import { LevelHeader } from "./LevelHeader";
+import { LevelMenu } from "./LevelMenu";
 import { QuizUnlockCard } from "./QuizUnlockCard";
+import { ResourceDrawer } from "./ResourceDrawer";
 import { TakeawayCard } from "./TakeawayCard";
 import { VideoCard } from "./VideoCard";
 
@@ -21,6 +23,8 @@ export function LevelScreen({ level }: { level: Level }) {
   const [startedWatched] = useState(watched);
   const [justMarked, setJustMarked] = useState(false);
   const quizLink = useRef<HTMLAnchorElement>(null);
+  const [resourceOpen, setResourceOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
 
   // The button that was pressed is replaced by "Watched", so hand keyboard
   // focus to the next step, the quiz that just unlocked.
@@ -38,6 +42,7 @@ export function LevelScreen({ level }: { level: Level }) {
         backLabel="Back to your path"
         title={`Level ${level.id} of ${TOTAL_LEVELS}`}
         progress={watched ? 2 / 3 : 1 / 3}
+        menu={<LevelMenu onOpenResource={() => setResourceOpen(true)} buttonRef={menuButton} />}
       />
 
       <div>
@@ -79,6 +84,15 @@ export function LevelScreen({ level }: { level: Level }) {
         questionCount={level.quiz.length}
         linkRef={quizLink}
       />
+
+      {resourceOpen && (
+        // The menu item that opened the drawer is gone by now, so focus returns to the ⋮ button.
+        <ResourceDrawer
+          resource={level.resource}
+          onClose={() => setResourceOpen(false)}
+          returnFocus={menuButton}
+        />
+      )}
     </>
   );
 }

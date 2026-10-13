@@ -51,6 +51,15 @@ export const arrive = {
   transition: { duration: 0.3, ease: "easeOut" } satisfies Transition,
 };
 
+/** The resource drawer: rises into place, and drops away when closed. */
+export const sheet = {
+  hidden: { opacity: 0, y: 40 },
+  shown: { opacity: 1, y: 0 },
+  transition: { duration: 0.25, ease: "easeOut" } satisfies Transition,
+  /** How long the drawer waits for its exit before it is removed. */
+  exitMs: 220,
+};
+
 export const starBounce = {
   initial: { scale: 0, rotate: -25 },
   animate: { scale: 1, rotate: 0 },

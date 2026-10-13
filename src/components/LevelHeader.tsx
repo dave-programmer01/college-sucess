@@ -15,10 +15,12 @@ type LevelHeaderProps = {
   title: string;
   /** How far through this level the student is, from 0 to 1. */
   progress: number;
+  /** Optional control at the right of the header, such as the ⋮ menu. */
+  menu?: React.ReactNode;
 };
 
 /** Back arrow, "Level N of 8" and the level's own progress bar. */
-export function LevelHeader({ backHref, backLabel, title, progress }: LevelHeaderProps) {
+export function LevelHeader({ backHref, backLabel, title, progress, menu }: LevelHeaderProps) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex h-10 items-center gap-1">
@@ -30,7 +32,8 @@ export function LevelHeader({ backHref, backLabel, title, progress }: LevelHeade
         >
           <ArrowLeft className="size-5" aria-hidden="true" />
         </MotionLink>
-        <p className="text-h4 text-fg">{title}</p>
+        <p className="flex-1 text-h4 text-fg">{title}</p>
+        {menu}
       </div>
       <ProgressBar value={Math.round(progress * 100)} max={100} label="Progress through this level" />
     </div>

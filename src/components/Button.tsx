@@ -47,10 +47,34 @@ export function Button({ variant, fullWidth, className, type = "button", ...prop
 
 type ButtonLinkProps = StyleProps & {
   href: string;
+  /** An outside website: opens in a new tab instead of navigating inside the app. */
+  external?: boolean;
   children: React.ReactNode;
 };
 
-export function ButtonLink({ variant, fullWidth, className, href, children }: ButtonLinkProps) {
+export function ButtonLink({
+  variant,
+  fullWidth,
+  className,
+  href,
+  external = false,
+  children,
+}: ButtonLinkProps) {
+  if (external) {
+    return (
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...pressable}
+        className={buttonClasses({ variant, fullWidth, className })}
+      >
+        {children}
+        <span className="sr-only">(opens in a new tab)</span>
+      </motion.a>
+    );
+  }
+
   return (
     <MotionLink
       href={href}
