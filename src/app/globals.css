@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+/* Dark mode follows the `dark` class that next-themes puts on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens, taken from the mockup's style guide.
+ * Components use the semantic names (bg-surface, text-muted, border-line…),
+ * which flip automatically in dark mode, so `dark:` is rarely needed.
+ *
+ * Spacing uses Tailwind's 4px scale: 1 = 4, 2 = 8, 4 = 16, 6 = 24, 8 = 32, 12 = 48.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --backdrop: #f5f9f8; /* behind the app column on wide screens */
+  --canvas: #ffffff; /* page background */
+  --surface: #ffffff; /* cards */
+  --surface-muted: #f5f9f8; /* tinted cards, inactive controls */
+  --line: #e5e7eb; /* borders */
+  --fg: #111827; /* text */
+  --muted: #6b7280; /* secondary text */
+
+  --primary: #0f766e; /* filled buttons */
+  --primary-hover: #0d665f;
+  --primary-light: #14b8a6;
+  --primary-soft: #e6f4f1; /* chips, highlighted rows */
+  --on-primary: #ffffff;
+  --brand: #0f766e; /* green text, icons, rings and progress fills */
+
+  --error: #ef4444;
+  --error-soft: #fef2f2;
+  --star: #f59e0b;
+  --flame: #f97316;
+  --locked: #e5e7eb; /* locked level node */
+  --locked-fg: #9ca3af;
+  --overlay: rgb(15 23 42 / 0.5); /* scrim behind modals */
+
+  --elevation-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
+  --elevation-raised: 0 2px 4px rgb(15 23 42 / 0.06), 0 10px 24px rgb(15 23 42 / 0.1);
+}
+
+.dark {
+  --backdrop: #0b1120;
+  --canvas: #0f172a;
+  --surface: #182235;
+  --surface-muted: #1e293b;
+  --line: #2b3648;
+  --fg: #f1f5f9;
+  --muted: #94a3b8;
+
+  --primary: #0f766e;
+  --primary-hover: #11857b;
+  --primary-light: #14b8a6;
+  --primary-soft: #123036;
+  --on-primary: #ffffff;
+  --brand: #14b8a6;
+
+  --error: #f87171;
+  --error-soft: #3a1d24;
+  --star: #fbbf24;
+  --flame: #fb923c;
+  --locked: #2b3648;
+  --locked-fg: #64748b;
+  --overlay: rgb(2 6 23 / 0.7);
+
+  --elevation-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+  --elevation-raised: 0 2px 4px rgb(0 0 0 / 0.35), 0 10px 24px rgb(0 0 0 / 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-backdrop: var(--backdrop);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-brand: var(--brand);
+  --color-error: var(--error);
+  --color-error-soft: var(--error-soft);
+  --color-star: var(--star);
+  --color-flame: var(--flame);
+  --color-locked: var(--locked);
+  --color-locked-fg: var(--locked-fg);
+  --color-overlay: var(--overlay);
+
+  --shadow-card: var(--elevation-card);
+  --shadow-raised: var(--elevation-raised);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Type scale: size / line-height. Headings are semibold. */
+  --text-h1: 2rem;
+  --text-h1--line-height: 2.5rem;
+  --text-h1--font-weight: 600;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 2rem;
+  --text-h2--font-weight: 600;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.75rem;
+  --text-h3--font-weight: 600;
+  --text-h4: 1rem;
+  --text-h4--line-height: 1.5rem;
+  --text-h4--font-weight: 600;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.25rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+
+  --radius-control: 0.75rem; /* 12px: buttons, inputs, chips */
+  --radius-card: 1rem; /* 16px: cards, modals */
+}
+
+@layer base {
+  body {
+    background: var(--backdrop);
+    color: var(--fg);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  :focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+  }
+
+  /* Framer Motion handles its own animations; this covers CSS transitions. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

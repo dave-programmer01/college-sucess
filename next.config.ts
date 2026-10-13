@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  // The dev badge sits on top of the bottom nav at phone width. Errors still show.
+  devIndicators: false,
   turbopack: {
     rules: {
       "*.css": {
