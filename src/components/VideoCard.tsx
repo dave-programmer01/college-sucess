@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Clapperboard, Play } from "lucide-react";
 import { useState } from "react";
+import { usePressable } from "@/lib/use-pressable";
 import { getYouTubeId } from "@/lib/youtube";
 import { MediaPlaceholder } from "./illustrations/MediaPlaceholder";
 
@@ -17,11 +18,12 @@ type VideoCardProps = {
 export function VideoCard({ videoUrl, title }: VideoCardProps) {
   const [playing, setPlaying] = useState(false);
   const id = getYouTubeId(videoUrl);
+  const tap = usePressable("row");
 
   if (!id) {
     return (
       <div className={`${frame} grid place-items-center border border-line bg-surface-muted`}>
-        <MediaPlaceholder className="absolute inset-0 size-full opacity-60" />
+        <MediaPlaceholder building={false} className="absolute inset-0 size-full" />
         <p className="relative flex items-center gap-2 rounded-full bg-surface py-2 pr-5 pl-2 text-h4 text-fg shadow-card">
           <span className="grid size-9 place-items-center rounded-full bg-primary-soft text-brand">
             <Clapperboard className="size-5" aria-hidden="true" />
@@ -40,7 +42,7 @@ export function VideoCard({ videoUrl, title }: VideoCardProps) {
         type="button"
         onClick={() => setPlaying(true)}
         aria-label={`Play video: ${title}`}
-        whileTap={{ scale: 0.98 }}
+        {...tap}
         className={`${frame} block bg-surface-muted bg-cover bg-center`}
         style={{ backgroundImage: `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)` }}
       >

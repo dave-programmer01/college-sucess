@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "@/components/Providers";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/metadata";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,13 +9,22 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+// Defaults for every page. Each page sets its own title and description on top
+// of these; the browser tab reads "Page · First Year, Level by Level".
 export const metadata: Metadata = {
   title: {
-    default: "First Year, Level by Level",
-    template: "%s · First Year, Level by Level",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "Your first year at Lehman, step by step. Short videos, key takeaways and real resources.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export const viewport: Viewport = {

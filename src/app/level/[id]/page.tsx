@@ -6,7 +6,9 @@ import { LevelGate } from "@/components/LevelGate";
 import { LevelScreen } from "@/components/LevelScreen";
 import { LevelSkeleton } from "@/components/LevelSkeleton";
 import { PageTransition } from "@/components/PageTransition";
+import { TOTAL_LEVELS } from "@/data/levels";
 import { levelFromParam, levelStaticParams } from "@/lib/level-route";
+import { pageMetadata } from "@/lib/metadata";
 
 // Level pages never depend on the request, so each one is generated once and
 // served as a file. An id that isn't a level then gets a real 404 response.
@@ -18,7 +20,11 @@ type Params = PageProps<"/level/[id]">["params"];
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const level = levelFromParam((await params).id);
-  return { title: level ? level.title : "Level not found" };
+  if (!level) return { title: "Level not found" };
+  return pageMetadata(
+    `Level ${level.id}: ${level.title}`,
+    `Level ${level.id} of ${TOTAL_LEVELS}, "${level.title}": a short video, the key takeaways and a quick check.`,
+  );
 }
 
 // The frame around a level is the same for every level, so Next can show it the

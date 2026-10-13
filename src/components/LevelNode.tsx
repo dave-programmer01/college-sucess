@@ -5,7 +5,7 @@ import { pulse, unlock } from "@/lib/motion";
 import type { LevelStatus } from "@/lib/progress";
 
 const rings: Record<LevelStatus, string> = {
-  completed: "ring-2 ring-primary ring-offset-2 ring-offset-surface",
+  completed: "ring-2 ring-brand ring-offset-2 ring-offset-surface",
   current: "ring-4 ring-primary-light/35",
   locked: "ring-0 ring-transparent",
 };

@@ -7,8 +7,12 @@ import { DownloadChecklistButton } from "@/components/DownloadChecklistButton";
 import { Campus } from "@/components/illustrations/Campus";
 import { PageTransition } from "@/components/PageTransition";
 import { TOTAL_LEVELS } from "@/data/levels";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Your checklist" };
+export const metadata: Metadata = pageMetadata(
+  "Your Checklist",
+  "Every level finished. Download your first-year checklist with the key takeaways and Lehman resources.",
+);
 
 // As in the mockup, the final screen has the bottom nav but no app header.
 export default function CompletePage() {

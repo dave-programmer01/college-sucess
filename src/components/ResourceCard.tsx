@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import type { Resource } from "@/data/levels";
-import { pressable } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 import { Chip } from "./Chip";
 import { ResourceImage } from "./ResourceImage";
 
@@ -16,6 +16,8 @@ type ResourceCardProps = {
 };
 
 export function ResourceCard({ resource, caption, onOpen }: ResourceCardProps) {
+  const pressable = usePressable();
+
   return (
     <motion.button
       type="button"

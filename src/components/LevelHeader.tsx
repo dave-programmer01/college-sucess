@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { pressable } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 import { ProgressBar } from "./ProgressBar";
 
 const MotionLink = motion.create(Link);
@@ -21,14 +21,16 @@ type LevelHeaderProps = {
 
 /** Back arrow, "Level N of 8" and the level's own progress bar. */
 export function LevelHeader({ backHref, backLabel, title, progress, menu }: LevelHeaderProps) {
+  const pressable = usePressable();
+
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex h-10 items-center gap-1">
+      <div className="flex h-11 items-center">
         <MotionLink
           href={backHref}
           aria-label={backLabel}
           {...pressable}
-          className="-ml-2 grid size-10 place-items-center rounded-full text-fg transition-colors hover:bg-surface-muted"
+          className="-ml-3 grid size-11 place-items-center rounded-full text-fg transition-colors hover:bg-surface-muted"
         >
           <ArrowLeft className="size-5" aria-hidden="true" />
         </MotionLink>

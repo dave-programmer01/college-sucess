@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { PageTransition } from "@/components/PageTransition";
 import { ResourceList } from "@/components/ResourceList";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Resources" };
+export const metadata: Metadata = pageMetadata(
+  "Resources",
+  "The Lehman offices and services that go with each level: what they help with, where they are and when they are open.",
+);
 
 export default function ResourcesPage() {
   return (

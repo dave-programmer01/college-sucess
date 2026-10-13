@@ -15,9 +15,9 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2 rounded-control">
-      <LogoMark />
-      <span className="text-h4 text-fg">
+    <Link href="/" className="flex min-w-0 items-center gap-2 rounded-control py-2">
+      <LogoMark className="size-7 shrink-0" />
+      <span className="text-[0.8125rem] font-semibold whitespace-nowrap text-fg min-[360px]:text-h4">
         <span className="text-brand">First Year,</span> Level by Level
       </span>
     </Link>

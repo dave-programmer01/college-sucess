@@ -3,17 +3,18 @@
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { pressable } from "@/lib/motion";
 import { useHydrated } from "@/lib/use-hydrated";
+import { usePressable } from "@/lib/use-pressable";
 
 const base =
-  "grid size-10 place-items-center rounded-full transition-colors hover:bg-surface-muted";
+  "grid size-10 place-items-center rounded-full transition-colors hover:bg-surface-muted min-[360px]:size-11";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   // The theme is only known in the browser. Until then the active icon is
   // picked by CSS alone, so server and client markup match.
   const hydrated = useHydrated();
+  const pressable = usePressable();
 
   return (
     <div className="flex items-center" role="group" aria-label="Theme">

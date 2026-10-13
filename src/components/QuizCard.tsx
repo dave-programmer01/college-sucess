@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import type { QuizQuestion } from "@/data/levels";
 import { pop, shake } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 import { CheckBadge, CrossBadge } from "./CheckBadge";
 
 const LETTERS = "ABCDEFGH";
@@ -31,6 +32,7 @@ export function QuizCard({
 }: QuizCardProps) {
   const answered = selected !== null;
   const list = useRef<HTMLUListElement>(null);
+  const tap = usePressable("row");
 
   // "Next" and "Try again" disappear when pressed; put focus back on the answers.
   useEffect(() => {
@@ -65,7 +67,7 @@ export function QuizCard({
                 aria-pressed={picked}
                 onClick={() => onSelect(index)}
                 animate={correct ? pop : wrong ? shake : { x: 0, scale: 1 }}
-                whileTap={answered || crossedOut ? undefined : { scale: 0.98 }}
+                {...(answered || crossedOut ? {} : tap)}
                 className={`flex min-h-12 w-full items-center gap-3 rounded-control border px-4 py-3 text-left text-small transition-colors ${look}`}
               >
                 <span className="w-5 shrink-0 font-medium text-muted">{LETTERS[index]}.</span>

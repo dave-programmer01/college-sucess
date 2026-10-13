@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { BookOpen, House, MapPin, User, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { pressable } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 import { useVisitKey } from "@/lib/use-visit-key";
 
 const MotionLink = motion.create(Link);
@@ -27,6 +27,7 @@ const tabs: Tab[] = [
 export function BottomNav() {
   const pathname = usePathname();
   const visit = useVisitKey();
+  const pressable = usePressable();
 
   return (
     <nav

@@ -3,9 +3,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Lock } from "lucide-react";
 import Link from "next/link";
-import { pressable, unlock } from "@/lib/motion";
-
-const MotionLink = motion.create(Link);
+import { unlock } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 
 type QuizUnlockCardProps = {
   levelId: number;
@@ -22,10 +21,28 @@ const gone = { opacity: 0, scale: 0.6 };
 /**
  * "Next: Take the quick check". Locked and inert until the video is watched;
  * then the lock leaves, the tile fills with colour and the card becomes a link.
+ *
+ * The card is the same element in both states so the tile can animate when it
+ * unlocks; only the heading turns into a link, stretched over the whole card.
  */
 export function QuizUnlockCard({ levelId, unlocked, questionCount, linkRef }: QuizUnlockCardProps) {
-  const content = (
+  const pressable = usePressable();
+
+  const heading = (
     <>
+      <span className="font-semibold">Next:</span> Take the quick check
+    </>
+  );
+
+  return (
+    <motion.div
+      {...(unlocked ? pressable : {})}
+      className={`relative flex items-center gap-3 rounded-card border p-4 transition-[background-color,border-color,box-shadow] duration-300 ${
+        unlocked
+          ? "border-brand/30 bg-primary-soft hover:shadow-raised has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-primary-light"
+          : "border-line bg-surface-muted"
+      }`}
+    >
       <span className="relative grid size-10 shrink-0 place-items-center overflow-hidden rounded-control bg-locked">
         <motion.span
           className="absolute inset-0 bg-primary"
@@ -50,38 +67,25 @@ export function QuizUnlockCard({ levelId, unlocked, questionCount, linkRef }: Qu
           <ArrowRight className="size-5" aria-hidden="true" />
         </motion.span>
       </span>
+
       <span className="flex min-w-0 flex-col">
-        <span className={`text-small ${unlocked ? "text-fg" : "text-muted"}`}>
-          <span className="font-semibold">Next:</span> Take the quick check
-        </span>
+        {unlocked ? (
+          <Link
+            ref={linkRef}
+            href={`/level/${levelId}/check`}
+            className="text-small text-fg after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
+          >
+            {heading}
+          </Link>
+        ) : (
+          <span className="text-small text-muted">{heading}</span>
+        )}
         <span className="text-caption text-muted">
           {unlocked
             ? `${questionCount} quick ${questionCount === 1 ? "question" : "questions"}`
             : "Watch the video to unlock the quiz."}
         </span>
       </span>
-    </>
-  );
-
-  const classes =
-    "flex items-center gap-3 rounded-card border p-4 transition-colors duration-300";
-
-  if (!unlocked) {
-    return (
-      <div aria-disabled="true" className={`${classes} border-line bg-surface-muted`}>
-        {content}
-      </div>
-    );
-  }
-
-  return (
-    <MotionLink
-      ref={linkRef}
-      href={`/level/${levelId}/check`}
-      {...pressable}
-      className={`${classes} border-brand/30 bg-primary-soft hover:shadow-raised`}
-    >
-      {content}
-    </MotionLink>
+    </motion.div>
   );
 }

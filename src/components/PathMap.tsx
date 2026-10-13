@@ -8,10 +8,9 @@ import { levels, TOTAL_LEVELS, type Level } from "@/data/levels";
 import { staggerItem, staggerList, unlock } from "@/lib/motion";
 import type { LevelStatus } from "@/lib/progress";
 import { useProgress } from "@/lib/progress-context";
+import { usePressable } from "@/lib/use-pressable";
 import { ButtonLink } from "./Button";
 import { LevelNode } from "./LevelNode";
-
-const MotionLink = motion.create(Link);
 
 // Geometry of the winding track, in px. Nodes alternate left and right of the
 // track's centre and an S-curve joins each one to the next.
@@ -115,9 +114,29 @@ function LevelRow({ level, index, status, unlocking }: LevelRowProps) {
   }, [unlocking, level.id, acknowledgeUnlock]);
 
   const shown: LevelStatus = unlocking && !revealed ? "locked" : status;
+  const open = shown !== "locked";
+  const tap = usePressable("row");
 
-  const content = (
+  const title = (
     <>
+      <span className="sr-only">Level {level.id}: </span>
+      {level.title}
+    </>
+  );
+  const titleClasses = "line-clamp-2 text-small font-semibold";
+
+  // The row is the same element whether the level is locked or open, so the
+  // node and status line inside it stay in place and can animate when the
+  // level unlocks. Only the title turns into a link, stretched over the row.
+  return (
+    <motion.div
+      {...(open ? tap : {})}
+      className={`${rowClasses} relative ${
+        open
+          ? "transition-colors hover:bg-surface-muted has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-primary-light"
+          : ""
+      }`}
+    >
       <span className="relative h-full">
         <span
           className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -127,34 +146,28 @@ function LevelRow({ level, index, status, unlocking }: LevelRowProps) {
         </span>
       </span>
       <span
-        className={`flex min-w-0 items-center justify-between gap-2 rounded-control px-3 py-2 transition-colors duration-300 ${
+        className={`flex min-h-[58px] min-w-0 items-center justify-between gap-2 rounded-control px-3 py-1 transition-colors duration-300 ${
           shown === "current" ? "bg-primary-soft" : ""
         }`}
       >
         <span className="flex min-w-0 flex-col gap-0.5">
-          <span
-            className={`line-clamp-2 text-small font-semibold ${
-              shown === "locked" ? "text-muted" : "text-fg"
-            }`}
-          >
-            <span className="sr-only">Level {level.id}: </span>
-            {level.title}
-          </span>
+          {open ? (
+            <Link
+              href={`/level/${level.id}`}
+              className={`${titleClasses} text-fg after:absolute after:inset-0 after:rounded-control focus-visible:outline-none`}
+            >
+              {title}
+            </Link>
+          ) : (
+            <span className={`${titleClasses} text-muted`}>{title}</span>
+          )}
           <StatusLine status={shown} />
         </span>
         {shown === "current" && (
           <ChevronRight className="size-4 shrink-0 text-brand" aria-hidden="true" />
         )}
       </span>
-    </>
-  );
-
-  if (shown === "locked") return <div className={rowClasses}>{content}</div>;
-
-  return (
-    <MotionLink href={`/level/${level.id}`} whileTap={{ scale: 0.98 }} className={rowClasses}>
-      {content}
-    </MotionLink>
+    </motion.div>
   );
 }
 

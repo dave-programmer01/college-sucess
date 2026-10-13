@@ -7,6 +7,7 @@ import { LevelSkeleton } from "@/components/LevelSkeleton";
 import { PageTransition } from "@/components/PageTransition";
 import { QuizRunner } from "@/components/QuizRunner";
 import { levelFromParam, levelStaticParams } from "@/lib/level-route";
+import { pageMetadata } from "@/lib/metadata";
 
 export const ensureStatic = "navigation";
 
@@ -16,7 +17,11 @@ type Params = PageProps<"/level/[id]/check">["params"];
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const level = levelFromParam((await params).id);
-  return { title: level ? `Quick check: ${level.title}` : "Level not found" };
+  if (!level) return { title: "Level not found" };
+  return pageMetadata(
+    `Quick Check: ${level.title}`,
+    `A quick check on what you learned in level ${level.id}, "${level.title}".`,
+  );
 }
 
 export default function CheckPage({ params }: { params: Params }) {

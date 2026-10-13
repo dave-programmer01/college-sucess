@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Clock, ExternalLink, MapPin, X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import type { Resource } from "@/data/levels";
-import { pressable, sheet } from "@/lib/motion";
+import { sheet } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 import { Button, ButtonLink } from "./Button";
 import { Chip } from "./Chip";
 import { LogoMark } from "./Logo";
@@ -27,6 +28,7 @@ export function ResourceDrawer({ resource, onClose, returnFocus }: ResourceDrawe
   const [closing, setClosing] = useState(false);
   const titleId = useId();
   const textId = useId();
+  const pressable = usePressable();
 
   // Let the drawer drop away before it is removed.
   useEffect(() => {
@@ -63,7 +65,7 @@ export function ResourceDrawer({ resource, onClose, returnFocus }: ResourceDrawe
             onClick={close}
             aria-label="Close"
             {...pressable}
-            className="-mr-2 grid size-10 place-items-center rounded-full text-muted transition-colors hover:bg-surface-muted"
+            className="-mr-3 grid size-11 place-items-center rounded-full text-muted transition-colors hover:bg-surface-muted"
           >
             <X className="size-5" aria-hidden="true" />
           </motion.button>

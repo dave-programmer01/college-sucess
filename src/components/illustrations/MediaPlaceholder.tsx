@@ -1,8 +1,14 @@
+type MediaPlaceholderProps = {
+  className?: string;
+  /** Leave the building out when something is shown on top, such as a label. */
+  building?: boolean;
+};
+
 /**
  * Placeholder picture of a campus building on a hill, used wherever a real
  * photo or video still is missing. Fills its box and crops like a photo.
  */
-export function MediaPlaceholder({ className }: { className?: string }) {
+export function MediaPlaceholder({ className, building = true }: MediaPlaceholderProps) {
   return (
     <svg
       viewBox="0 0 320 180"
@@ -20,7 +26,7 @@ export function MediaPlaceholder({ className }: { className?: string }) {
         d="M0 128 C60 100 130 104 190 122 C240 136 290 112 320 118 V180 H0 Z"
         className="fill-[#c4e4db] dark:fill-[#18383f]"
       />
-      <g>
+      <g className={building ? undefined : "hidden"}>
         <rect x="118" y="84" width="84" height="46" className="fill-[#f6f1e6] dark:fill-[#c9d3d6]" />
         <rect x="148" y="52" width="24" height="78" className="fill-[#f6f1e6] dark:fill-[#c9d3d6]" />
         <path d="M144 52 L160 28 L176 52 Z" className="fill-primary" />

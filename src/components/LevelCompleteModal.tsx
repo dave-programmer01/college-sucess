@@ -51,7 +51,7 @@ export function LevelCompleteModal({ level }: { level: Level }) {
         initial={arrive.initial}
         animate={arrive.animate}
         transition={arrive.transition}
-        className="flex w-full max-w-sm flex-col items-center gap-3 rounded-card bg-surface px-6 pt-8 pb-6 text-center shadow-raised"
+        className="flex w-full max-w-sm flex-col items-center gap-3 rounded-card bg-surface px-6 pt-8 pb-3 text-center shadow-raised"
       >
         <motion.div
           initial={starBounce.initial}
@@ -77,7 +77,7 @@ export function LevelCompleteModal({ level }: { level: Level }) {
           {nextLevel ? "Next level" : "See your results"}
           <ArrowRight className="size-4" aria-hidden="true" />
         </ButtonLink>
-        <Link href="/path" className="rounded-control px-3 py-1 text-small font-medium text-brand">
+        <Link href="/path" className="rounded-control px-4 py-3 text-small font-medium text-brand">
           Back to your path
         </Link>
       </motion.div>

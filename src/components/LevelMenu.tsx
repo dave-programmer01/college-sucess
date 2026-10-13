@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { EllipsisVertical, Landmark, Route } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
-import { pressable } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 
 const item =
-  "flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-small text-fg transition-colors hover:bg-surface-muted";
+  "flex w-full items-center gap-3 rounded-control px-3 py-3 text-left text-small text-fg transition-colors hover:bg-surface-muted";
 
 type LevelMenuProps = {
   onOpenResource: () => void;
@@ -20,6 +20,7 @@ export function LevelMenu({ onOpenResource, buttonRef }: LevelMenuProps) {
   const [open, setOpen] = useState(false);
   const wrapper = useRef<HTMLDivElement>(null);
   const menuId = useId();
+  const pressable = usePressable();
 
   // While open: a tap anywhere else or Escape closes it.
   useEffect(() => {
@@ -50,7 +51,7 @@ export function LevelMenu({ onOpenResource, buttonRef }: LevelMenuProps) {
         aria-controls={menuId}
         onClick={() => setOpen(!open)}
         {...pressable}
-        className="-mr-2 grid size-10 place-items-center rounded-full text-fg transition-colors hover:bg-surface-muted"
+        className="-mr-3 grid size-11 place-items-center rounded-full text-fg transition-colors hover:bg-surface-muted"
       >
         <EllipsisVertical className="size-5" aria-hidden="true" />
       </motion.button>

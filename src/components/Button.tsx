@@ -2,7 +2,7 @@
 
 import { motion, type HTMLMotionProps } from "framer-motion";
 import Link from "next/link";
-import { pressable } from "@/lib/motion";
+import { usePressable } from "@/lib/use-pressable";
 
 const MotionLink = motion.create(Link);
 
@@ -35,6 +35,8 @@ function buttonClasses({ variant = "primary", fullWidth, className }: StyleProps
 type ButtonProps = StyleProps & Omit<HTMLMotionProps<"button">, "className">;
 
 export function Button({ variant, fullWidth, className, type = "button", ...props }: ButtonProps) {
+  const pressable = usePressable();
+
   return (
     <motion.button
       type={type}
@@ -60,6 +62,8 @@ export function ButtonLink({
   external = false,
   children,
 }: ButtonLinkProps) {
+  const pressable = usePressable();
+
   if (external) {
     return (
       <motion.a

@@ -15,7 +15,7 @@ const features: { title: string; text: string; icon: LucideIcon }[] = [
 export default function Home() {
   return (
     <div className="flex min-h-dvh flex-col bg-canvas">
-      <header className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between gap-2 pr-2 pl-4 sm:px-6">
+      <header className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between gap-2 pr-1 pl-4 sm:px-6">
         <Logo />
         <ThemeToggle />
       </header>
@@ -27,8 +27,10 @@ export default function Home() {
               <h1 className="text-h1 text-fg md:text-[2.5rem] md:leading-[3rem]">
                 Your first year at Lehman, step by step.
               </h1>
-              <p className="max-w-xs text-body text-muted">
-                Short videos. Key takeaways. Real resources. You got this.
+              <p className="text-body text-muted">
+                Short videos. Key takeaways. Real resources.{" "}
+                <br className="hidden md:block" />
+                You got this.
               </p>
               <ButtonLink href="/path" className="mt-2">
                 Start your path
