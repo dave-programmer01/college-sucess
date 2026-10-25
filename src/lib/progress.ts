@@ -47,9 +47,23 @@ export function markWatched(progress: Progress, id: number): Progress {
   return { ...progress, watched: [...progress.watched, id] };
 }
 
-/** Finishes the current level. Any other level, or one not yet watched, is ignored. */
+/** A level whose videoUrl is "" (like Finish) has nothing to watch. */
+export function levelHasVideo(id: number): boolean {
+  return (levels.find((level) => level.id === id)?.videoUrl.trim() ?? "") !== "";
+}
+
+/**
+ * The quick check opens once the level's video has been watched, or as soon as
+ * the level is unlocked when it has no video.
+ */
+export function quizOpen(progress: Progress, id: number): boolean {
+  if (levelStatus(progress, id) === "locked") return false;
+  return !levelHasVideo(id) || progress.watched.includes(id);
+}
+
+/** Finishes the current level. Any other level, or one whose quiz isn't open yet, is ignored. */
 export function completeLevel(progress: Progress, id: number): Progress {
-  if (id !== currentLevelId(progress) || !progress.watched.includes(id)) return progress;
+  if (id !== currentLevelId(progress) || !quizOpen(progress, id)) return progress;
   return { ...progress, completed: [...progress.completed, id] };
 }
 

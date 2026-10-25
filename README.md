@@ -73,9 +73,9 @@ Use MP4 files (H.264 video, AAC sound), which play in every browser. The clip pl
 
 Pasting the whole link works too, including `youtu.be` share links.
 
-Leave `videoUrl` as `""` for a level without a video, like Finish: the level then has no video card at all.
+Leave `videoUrl` as `""` for a level without a video, like Finish: the level then has no video card and no watch step, and its quick check is open straight away.
 
-A level is marked as watched when its clip plays to the end. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or no video at all. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title. A level without a video doesn't show it.
+A level is marked as watched when its clip plays to the end, which opens its quick check. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or one that can't be played. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title. A level without a video doesn't show it.
 
 ### Edit or add a quiz question
 

@@ -5,6 +5,7 @@ import { CircleCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { TOTAL_LEVELS, type Level } from "@/data/levels";
 import { arrive } from "@/lib/motion";
+import { levelHasVideo } from "@/lib/progress";
 import { useProgress } from "@/lib/progress-context";
 import { getVideoSource } from "@/lib/video";
 import { Button } from "./Button";
@@ -19,6 +20,10 @@ import { VideoCard } from "./VideoCard";
 export function LevelScreen({ level }: { level: Level }) {
   const { isWatched, markWatched } = useProgress();
   const watched = isWatched(level.id);
+  // A level without a video (videoUrl "") has no video card and no watch step:
+  // its quick check is open straight away.
+  const needsWatching = levelHasVideo(level.id);
+  const quizIsOpen = !needsWatching || watched;
   // Whether the video was already watched when this screen opened, so
   // "Watched" only animates in when the button is pressed now.
   const [startedWatched] = useState(watched);
@@ -41,12 +46,13 @@ export function LevelScreen({ level }: { level: Level }) {
 
   return (
     <>
-      {/* A level has three steps: open it, watch the video, pass the quick check. */}
+      {/* A level has three steps: open it, watch the video, pass the quick check.
+          Without a video the second step is already done. */}
       <LevelHeader
         backHref="/path"
         backLabel="Back to your path"
         title={`Level ${level.id} of ${TOTAL_LEVELS}`}
-        progress={watched ? 2 / 3 : 1 / 3}
+        progress={quizIsOpen ? 2 / 3 : 1 / 3}
         menu={<LevelMenu onOpenResource={() => setResourceOpen(true)} buttonRef={menuButton} />}
       />
 
@@ -55,16 +61,15 @@ export function LevelScreen({ level }: { level: Level }) {
         {details.length > 0 && <p className="mt-1 text-small text-muted">{details.join(" · ")}</p>}
       </div>
 
-      {/* A level with no video (videoUrl "") has no video card at all. A video that is
-          set but can't be played still shows the "Video coming soon" card.
+      {/* A video that is set but can't be played still shows the "Video coming soon" card.
           Playing the clip to the end marks the level as watched, the same as the button.
           Focus stays on the player, so unlike the button it isn't moved to the quiz. */}
-      {level.videoUrl.trim() !== "" && (
+      {needsWatching && (
         <VideoCard videoUrl={level.videoUrl} title={level.title} onEnded={() => markWatched(level.id)} />
       )}
       <TakeawayCard takeaways={level.takeaways} />
 
-      {watched ? (
+      {needsWatching && (watched ? (
         <motion.p
           role="status"
           initial={startedWatched ? false : arrive.initial}
@@ -87,11 +92,11 @@ export function LevelScreen({ level }: { level: Level }) {
           <CircleCheck className="size-5" aria-hidden="true" />
           Mark as watched
         </Button>
-      )}
+      ))}
 
       <QuizUnlockCard
         levelId={level.id}
-        unlocked={watched}
+        unlocked={quizIsOpen}
         questionCount={level.quiz.length}
         linkRef={quizLink}
       />

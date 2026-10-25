@@ -11,6 +11,7 @@ import {
   levelStatus,
   localDay,
   markWatched,
+  quizOpen,
   recordVisit,
   resetProgress,
   subscribe,
@@ -33,6 +34,8 @@ type ProgressContextValue = {
   unlockSeen: number;
   statusOf: (id: number) => LevelStatus;
   isWatched: (id: number) => boolean;
+  /** Whether the level's quick check can be taken: video watched, or no video to watch. */
+  quizOpen: (id: number) => boolean;
   markWatched: (id: number) => void;
   completeLevel: (id: number) => void;
   acknowledgeUnlock: (id: number) => void;
@@ -67,6 +70,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     unlockSeen: progress.unlockSeen,
     statusOf: (id) => levelStatus(progress, id),
     isWatched: (id) => progress.watched.includes(id),
+    quizOpen: (id) => quizOpen(progress, id),
     markWatched: (id) => updateProgress((current) => markWatched(current, id)),
     completeLevel: (id) => updateProgress((current) => completeLevel(current, id)),
     acknowledgeUnlock: (id) => updateProgress((current) => acknowledgeUnlock(current, id)),

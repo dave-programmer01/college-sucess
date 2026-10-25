@@ -16,7 +16,8 @@
  *    Or a YouTube video: paste its ID (the part after "v=") or the whole link:
  *           videoUrl: "abc123XYZ_0",
  *    Leave videoUrl as "" for a level without a video, like Finish: the
- *    level then has no video card at all.
+ *    level then has no video card and no watch step, and its quick check
+ *    is open straight away.
  *    A level is marked as watched when its video plays to the end. The
  *    "Mark as watched" button works too, so a level can always be finished.
  *
@@ -61,7 +62,7 @@ export type Level = {
   chapter: number | null;
   /** Length of the video, shown under the title. Not shown for a level without a video. */
   duration: string;
-  /** A clip in public/videos ("/videos/name.mp4"), or a YouTube ID or link. "" means no video card. */
+  /** A clip in public/videos ("/videos/name.mp4"), or a YouTube ID or link. "" means no video and no watch step. */
   videoUrl: string;
   takeaways: string[];
   quiz: QuizQuestion[];

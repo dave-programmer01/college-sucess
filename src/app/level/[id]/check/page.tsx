@@ -38,9 +38,10 @@ async function CheckContent({ params }: { params: Params }) {
   const level = levelFromParam((await params).id);
   if (!level) notFound();
 
-  // The quiz opens only for an unlocked level whose video has been watched.
+  // The quiz opens only for an unlocked level whose video has been watched
+  // (or straight away for a level without a video).
   return (
-    <LevelGate levelId={level.id} requireWatched>
+    <LevelGate levelId={level.id} requireQuizOpen>
       <PageTransition className="flex flex-col gap-4 px-4 pt-2 pb-6">
         <QuizRunner level={level} />
       </PageTransition>
