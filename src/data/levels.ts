@@ -107,12 +107,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "New Student Resources", // TODO: verify
+      name: "Onboarding Advisement Office",
       tag: "Getting Started",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      description: "Helps new and transfer students get set up, from admission through registering for your first semester.",
+      location: "Old Gym Building, Room 308B",
+      hours: "Mon–Fri, 9:00 AM – 5:00 PM",
+      url: "https://www.lehman.cuny.edu/advising",
       image: "",
     },
     xp: 20,
@@ -153,12 +153,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Office of Undergraduate Advising", // TODO: verify
-      tag: "Academic Support",
-      description: "Helps you with course planning, major changes, and academic questions.", // TODO: verify
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      name: "Office of Campus Life",
+      tag: "Community",
+      description: "Your hub for clubs, student government, leadership programs and events — the easiest way to find your people.",
+      location: "Student Life Building, Room 219",
+      hours: "Call 718-960-2590 for current hours",
+      url: "https://lehman.edu/office-campus-life",
       image: "",
     },
     xp: 20,
@@ -199,12 +199,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Tutoring & Academic Support", // TODO: verify
+      name: "Lehman Tutoring Center (Instructional Support Services)",
       tag: "Academic Support",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      description: "Free tutoring in writing and course content, plus academic coaching and study-skills workshops.",
+      location: "Old Gym Building, Room 205",
+      hours: "Call 718-960-8175 for current hours",
+      url: "https://lehman.edu/academics/instructional-support-services",
       image: "",
     },
     xp: 20,
@@ -245,12 +245,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Counseling Services", // TODO: verify
-      tag: "Personal Support",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      name: "Office of Undergraduate Academic Advisement",
+      tag: "Academic Support",
+      description: "Advisors help you plan courses, explore or change your major, and stay on track to graduate.",
+      location: "Shuster Hall, Room 275B",
+      hours: "Mon–Fri, 9:00 AM – 5:00 PM",
+      url: "https://www.lehman.cuny.edu/advising",
       image: "",
     },
     xp: 20,
@@ -291,12 +291,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Health & Wellness Services", // TODO: verify
+      name: "Student Health Center",
       tag: "Wellness",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      description: "Free or low-cost primary care for students, walk-ins welcome. Also helps with nutrition, immunizations and health insurance.",
+      location: "Old Gym Building, Room B008",
+      hours: "Mon–Fri, 9:00 AM – 5:00 PM",
+      url: "https://www.lehman.cuny.edu/student-health-center",
       image: "",
     },
     xp: 20,
@@ -337,12 +337,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Library & Study Spaces", // TODO: verify
-      tag: "Study",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      name: "Counseling Center",
+      tag: "Personal Support",
+      description: "Talk to a counselor when stress, deadlines or life feel like too much. Free sessions in person or online.",
+      location: "Old Gym Building, Room 114",
+      hours: "Mon–Thu 9:00 AM – 7:00 PM, Fri–Sat 9:00 AM – 5:00 PM (fall & spring)",
+      url: "https://www.lehman.edu/student-affairs/counseling-center/",
       image: "",
     },
     xp: 20,
@@ -383,12 +383,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Career Services", // TODO: verify
+      name: "Career Exploration & Development Center",
       tag: "Career",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      description: "Career counseling, help deciding on a major, internships and connections with employers.",
+      location: "Shuster Hall, Room 254",
+      hours: "Call 718-960-8366 for current hours",
+      url: "https://www.lehman.edu/student-affairs/career-services/services/",
       image: "",
     },
     xp: 20,
@@ -418,12 +418,12 @@ export const levels: Level[] = [
       },
     ],
     resource: {
-      name: "Student Life & Clubs", // TODO: verify
-      tag: "Community",
-      description: "Placeholder description: say what this office helps students with.", // TODO: replace
-      location: "Location to be confirmed", // TODO: verify
-      hours: "Hours to be confirmed", // TODO: verify
-      url: "https://www.lehman.edu/", // TODO: verify
+      name: "Leonard Lief Library",
+      tag: "Study",
+      description: "Quiet floors, group study spaces, computers and help from librarians. Your home base for getting work done.",
+      location: "Leonard Lief Library building, main campus",
+      hours: "Hours change by semester. See the library website.",
+      url: "https://www.lehman.edu/library/",
       image: "",
     },
     xp: 20,

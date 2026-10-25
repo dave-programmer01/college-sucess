@@ -132,14 +132,24 @@ Video problems don't stop the build. A `videoUrl` that is neither a path in `pub
 
 ## Before you launch
 
-The content is placeholder text for now. Two markers in `levels.ts` show what is left:
+The content is real: the videos, takeaways and quizzes, and the eight Lehman resources, whose names, locations, hours and links were checked on lehman.edu in October 2026. Office details change, so check the resources again before each semester, hours and links especially. To see whether every resource link still loads:
+
+```bash
+grep -o 'url: "[^"]*"' src/data/levels.ts | cut -d'"' -f2 | xargs -n1 curl -sL -o /dev/null -w "%{http_code} %{url_effective}\n"
+```
+
+Each line should start with `200`. A `404` means that office's page has moved.
+
+Still placeholders: the resource pictures (see [Change a resource and its picture](#change-a-resource-and-its-picture)) and the landing and final-screen drawings (see [Swap the illustrations](#swap-the-illustrations)).
+
+When you add something you haven't finished or checked yet, mark it in `levels.ts` so it is easy to find later:
 
 | Marker | Meaning | How to list them |
 | --- | --- | --- |
 | `// TODO: replace` | Placeholder text that needs real content | `grep -n "TODO: replace" src/data/levels.ts` |
 | `// TODO: verify` | A Lehman-specific detail (office name, location, hours, link) that must be checked | `grep -n "TODO: verify" src/data/levels.ts` |
 
-Locations and opening hours currently read "to be confirmed" on purpose. Replace them only with details you have checked, and delete each marker as you go. When both commands print nothing, the content is done.
+Don't put a guessed room number or opening time in front of students; write "to be confirmed" until it is checked. Right now the only marker left is on the Finish level's `duration`, which isn't shown because Finish has no video.
 
 ## Swap the illustrations
 
