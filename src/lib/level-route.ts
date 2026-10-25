@@ -52,6 +52,12 @@ function checkLevels() {
         `${where}: videoUrl "${video.src}" points to public${video.src}, which doesn't exist, ` +
           `so "Video coming soon" is shown. Check the file name.`,
       );
+    } else if (video?.kind === "file" && !existsSync(path.join(process.cwd(), "public", video.poster))) {
+      console.warn(
+        `${where}: there is no still image at public${video.poster}, so the player may look ` +
+          `black on iPhones until it is played. Make one with: ` +
+          `ffmpeg -ss 1 -i public${video.src} -frames:v 1 -q:v 3 public${video.poster}`,
+      );
     }
   });
 }

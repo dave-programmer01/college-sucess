@@ -53,7 +53,13 @@ A video can be a clip stored with the app, or a YouTube video.
    videoUrl: "/videos/level-1-community.mp4",
    ```
 
-Use MP4 files (H.264 video, AAC sound), which play in every browser. The clip plays in the browser's own player inside the video card, and only its length and first frame load until the student presses play. Clips are served with the site, so keep them short and small: the current seven add up to about 14 MB.
+3. Give it a still image: a frame from the clip saved in [`public/videos/posters/`](public/videos/posters/) under the same name, ending in `.jpg`, for example `public/videos/posters/level-1-community.jpg`. It is shown before the clip plays; without it, iPhones may show a black box. To grab the frame one second in:
+
+   ```bash
+   ffmpeg -ss 1 -i public/videos/level-1-community.mp4 -frames:v 1 -q:v 3 public/videos/posters/level-1-community.jpg
+   ```
+
+Use MP4 files (H.264 video, AAC sound), which play in every browser. The clip plays in the browser's own player inside the video card, and only its still image and length load until the student presses play. Clips are served with the site, so keep them short and small: the current seven add up to about 14 MB.
 
 **A YouTube video:**
 
@@ -69,7 +75,7 @@ Pasting the whole link works too, including `youtu.be` share links.
 
 Leave `videoUrl` as `""` to show the "Video coming soon" card.
 
-A level is marked as watched when its clip plays to the end. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or no video at all. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title.
+A level is marked as watched when its clip plays to the end. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or no video at all. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title. A level without a video doesn't show it.
 
 ### Edit or add a quiz question
 
@@ -122,7 +128,7 @@ Add or delete a block in the `levels` list. The `id`s must count up from 0 with 
 - a `correctIndex` doesn't match one of the options, or a question has fewer than two options,
 - the `id`s don't count up from 0.
 
-Video problems don't stop the build. A `videoUrl` that is neither a path in `public/videos/` nor a YouTube ID or link, or that names a file that isn't there, prints a warning, and that level shows "Video coming soon". The same card appears if a clip fails to load in the browser.
+Video problems don't stop the build. A `videoUrl` that is neither a path in `public/videos/` nor a YouTube ID or link, or that names a file that isn't there, prints a warning, and that level shows "Video coming soon". The same card appears if a clip fails to load in the browser. A clip without its still image also prints a warning, with the command to make one.
 
 ## Before you launch
 
@@ -192,7 +198,7 @@ src/
     level-route.ts        checks levels.ts for mistakes
     checklist-pdf.ts      builds the PDF
     motion.ts             every animation's timing in one place
-public/videos/          the level videos
+public/videos/          the level videos, and their still images in posters/
 public/images/          pictures you add
 ```
 

@@ -10,6 +10,9 @@
  *      1. Put the .mp4 file in public/videos/.
  *      2. Set that level's videoUrl to its path, starting at /videos/:
  *           videoUrl: "/videos/level-1-community.mp4",
+ *      3. Put a still from the clip in public/videos/posters/ under the same
+ *         name, ending in .jpg: level-1-community.jpg. It shows before the
+ *         clip plays. The README has the command to make one.
  *    Or a YouTube video: paste its ID (the part after "v=") or the whole link:
  *           videoUrl: "abc123XYZ_0",
  *    Leave videoUrl as "" to show the "Video coming soon" card.
@@ -55,6 +58,7 @@ export type Level = {
   title: string;
   /** Book chapter this level covers, or null for the welcome and finish levels. */
   chapter: number | null;
+  /** Length of the video, shown under the title. Not shown for a level without a video. */
   duration: string;
   /** A clip in public/videos ("/videos/name.mp4"), or a YouTube ID or link. "" shows "Video coming soon". */
   videoUrl: string;

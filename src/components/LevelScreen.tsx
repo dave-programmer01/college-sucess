@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { TOTAL_LEVELS, type Level } from "@/data/levels";
 import { arrive } from "@/lib/motion";
 import { useProgress } from "@/lib/progress-context";
+import { getVideoSource } from "@/lib/video";
 import { Button } from "./Button";
 import { CheckBadge } from "./CheckBadge";
 import { LevelHeader } from "./LevelHeader";
@@ -32,7 +33,11 @@ export function LevelScreen({ level }: { level: Level }) {
     if (justMarked) quizLink.current?.focus();
   }, [justMarked]);
 
-  const details = [level.chapter === null ? null : `Chapter ${level.chapter}`, level.duration];
+  const hasVideo = getVideoSource(level.videoUrl) !== null;
+  const details = [
+    level.chapter === null ? null : `Chapter ${level.chapter}`,
+    hasVideo ? level.duration : null,
+  ].filter(Boolean);
 
   return (
     <>
@@ -47,7 +52,7 @@ export function LevelScreen({ level }: { level: Level }) {
 
       <div>
         <h1 className="text-h2 text-fg">{level.title}</h1>
-        <p className="mt-1 text-small text-muted">{details.filter(Boolean).join(" · ")}</p>
+        {details.length > 0 && <p className="mt-1 text-small text-muted">{details.join(" · ")}</p>}
       </div>
 
       {/* Playing the clip to the end marks the level as watched, the same as the button.

@@ -38,14 +38,15 @@ export function VideoCard({ videoUrl, title, onEnded }: VideoCardProps) {
     );
   }
 
-  // A clip in public/videos plays in the browser's own player. It only loads
-  // its length and first frame until the student presses play.
+  // A clip in public/videos plays in the browser's own player. Until the student
+  // presses play it shows the clip's still image and loads only its length.
   if (source.kind === "file") {
     return (
       <div className={`${frame} bg-black`}>
         <video
           className="size-full object-contain"
           src={source.src}
+          poster={source.poster}
           controls
           playsInline
           preload="metadata"
