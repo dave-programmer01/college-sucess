@@ -27,7 +27,9 @@ const tabs: Tab[] = [
 export function BottomNav() {
   const pathname = usePathname();
   const visit = useVisitKey();
-  const pressable = usePressable();
+  // Tabs only press in on tap. Growing on hover would push the right-most tab
+  // past the screen edge and make the page scroll sideways.
+  const pressable = usePressable("row");
 
   return (
     <nav
