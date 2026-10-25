@@ -50,7 +50,9 @@ export function LevelScreen({ level }: { level: Level }) {
         <p className="mt-1 text-small text-muted">{details.filter(Boolean).join(" · ")}</p>
       </div>
 
-      <VideoCard videoUrl={level.videoUrl} title={level.title} />
+      {/* Playing the clip to the end marks the level as watched, the same as the button.
+          Focus stays on the player, so unlike the button it isn't moved to the quiz. */}
+      <VideoCard videoUrl={level.videoUrl} title={level.title} onEnded={() => markWatched(level.id)} />
       <TakeawayCard takeaways={level.takeaways} />
 
       {watched ? (

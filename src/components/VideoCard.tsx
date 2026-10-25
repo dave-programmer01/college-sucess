@@ -4,23 +4,27 @@ import { motion } from "framer-motion";
 import { Clapperboard, Play } from "lucide-react";
 import { useState } from "react";
 import { usePressable } from "@/lib/use-pressable";
-import { getYouTubeId } from "@/lib/youtube";
+import { getVideoSource } from "@/lib/video";
 import { MediaPlaceholder } from "./illustrations/MediaPlaceholder";
 
 const frame = "relative aspect-video w-full overflow-hidden rounded-card shadow-card";
 
 type VideoCardProps = {
-  /** YouTube ID or link from levels.ts. Empty shows "Video coming soon". */
+  /** videoUrl from levels.ts: a clip in public/videos, a YouTube ID or link, or "" for "Video coming soon". */
   videoUrl: string;
   title: string;
+  /** Called when a clip stored with the app plays to the end. */
+  onEnded?: () => void;
 };
 
-export function VideoCard({ videoUrl, title }: VideoCardProps) {
+export function VideoCard({ videoUrl, title, onEnded }: VideoCardProps) {
   const [playing, setPlaying] = useState(false);
-  const id = getYouTubeId(videoUrl);
+  // A clip that can't be loaded, such as a missing file, falls back to "Video coming soon".
+  const [broken, setBroken] = useState(false);
+  const source = getVideoSource(videoUrl);
   const tap = usePressable("row");
 
-  if (!id) {
+  if (!source || broken) {
     return (
       <div className={`${frame} grid place-items-center border border-line bg-surface-muted`}>
         <MediaPlaceholder building={false} className="absolute inset-0 size-full" />
@@ -30,6 +34,25 @@ export function VideoCard({ videoUrl, title }: VideoCardProps) {
           </span>
           Video coming soon
         </p>
+      </div>
+    );
+  }
+
+  // A clip in public/videos plays in the browser's own player. It only loads
+  // its length and first frame until the student presses play.
+  if (source.kind === "file") {
+    return (
+      <div className={`${frame} bg-black`}>
+        <video
+          className="size-full object-contain"
+          src={source.src}
+          controls
+          playsInline
+          preload="metadata"
+          aria-label={`Video: ${title}`}
+          onEnded={onEnded}
+          onError={() => setBroken(true)}
+        />
       </div>
     );
   }
@@ -44,7 +67,7 @@ export function VideoCard({ videoUrl, title }: VideoCardProps) {
         aria-label={`Play video: ${title}`}
         {...tap}
         className={`${frame} block bg-surface-muted bg-cover bg-center`}
-        style={{ backgroundImage: `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)` }}
+        style={{ backgroundImage: `url(https://i.ytimg.com/vi/${source.id}/hqdefault.jpg)` }}
       >
         <span className="absolute inset-0 bg-black/20" />
         <span className="absolute top-1/2 left-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-primary shadow-raised">
@@ -58,7 +81,7 @@ export function VideoCard({ videoUrl, title }: VideoCardProps) {
     <div className={`${frame} bg-black`}>
       <iframe
         className="size-full"
-        src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
+        src={`https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&playsinline=1`}
         title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"

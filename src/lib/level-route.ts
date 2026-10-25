@@ -1,5 +1,7 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { getLevel, levels } from "@/data/levels";
-import { getYouTubeId } from "./youtube";
+import { getVideoSource } from "./video";
 
 /** Shared by the /level/[id] and /level/[id]/check pages. */
 
@@ -14,8 +16,8 @@ export function levelFromParam(id: string) {
 /**
  * Catches content mistakes in src/data/levels.ts while building or running
  * `next dev`, instead of leaving a student stuck on a level that can't be
- * finished. A video link that can't be read only warns: the level still works
- * and shows the "Video coming soon" card.
+ * finished. A video problem only warns: the level still works and shows the
+ * "Video coming soon" card.
  */
 function checkLevels() {
   levels.forEach((level, index) => {
@@ -39,9 +41,16 @@ function checkLevels() {
         );
       }
     });
-    if (level.videoUrl.trim() && !getYouTubeId(level.videoUrl)) {
+    const video = getVideoSource(level.videoUrl);
+    if (level.videoUrl.trim() && !video) {
       console.warn(
-        `${where}: videoUrl "${level.videoUrl}" isn't a YouTube ID or link, so "Video coming soon" is shown.`,
+        `${where}: videoUrl "${level.videoUrl}" isn't a file in public/videos or a YouTube ID or link, ` +
+          `so "Video coming soon" is shown.`,
+      );
+    } else if (video?.kind === "file" && !existsSync(path.join(process.cwd(), "public", video.src))) {
+      console.warn(
+        `${where}: videoUrl "${video.src}" points to public${video.src}, which doesn't exist, ` +
+          `so "Video coming soon" is shown. Check the file name.`,
       );
     }
   });

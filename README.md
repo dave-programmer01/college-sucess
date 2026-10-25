@@ -42,6 +42,21 @@ There are no environment variables and no database. To publish, run the build an
 
 ### Add a video
 
+A video can be a clip stored with the app, or a YouTube video.
+
+**A clip stored with the app** (how the current videos work):
+
+1. Put the file in [`public/videos/`](public/videos/), for example `public/videos/level-1-community.mp4`.
+2. Set that level's `videoUrl` to its path, starting with `/videos/` and without `public`:
+
+   ```ts
+   videoUrl: "/videos/level-1-community.mp4",
+   ```
+
+Use MP4 files (H.264 video, AAC sound), which play in every browser. The clip plays in the browser's own player inside the video card, and only its length and first frame load until the student presses play. Clips are served with the site, so keep them short and small: the current seven add up to about 14 MB.
+
+**A YouTube video:**
+
 1. Open the video on YouTube and copy its ID, the part after `v=`:
    `https://www.youtube.com/watch?v=abc123XYZ_0` → `abc123XYZ_0`
 2. Paste it into that level's `videoUrl`:
@@ -50,7 +65,11 @@ There are no environment variables and no database. To publish, run the build an
    videoUrl: "abc123XYZ_0",
    ```
 
-Pasting the whole link works too, including `youtu.be` share links. Leave `videoUrl` as `""` to show the "Video coming soon" card. A level can still be finished without a video, because "Mark as watched" is a button the student presses.
+Pasting the whole link works too, including `youtu.be` share links.
+
+Leave `videoUrl` as `""` to show the "Video coming soon" card.
+
+A level is marked as watched when its clip plays to the end. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or no video at all. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title.
 
 ### Edit or add a quiz question
 
@@ -103,7 +122,7 @@ Add or delete a block in the `levels` list. The `id`s must count up from 0 with 
 - a `correctIndex` doesn't match one of the options, or a question has fewer than two options,
 - the `id`s don't count up from 0.
 
-A `videoUrl` that isn't a YouTube ID or link doesn't stop the build. It prints a warning, and that level shows "Video coming soon".
+Video problems don't stop the build. A `videoUrl` that is neither a path in `public/videos/` nor a YouTube ID or link, or that names a file that isn't there, prints a warning, and that level shows "Video coming soon". The same card appears if a clip fails to load in the browser.
 
 ## Before you launch
 
@@ -173,6 +192,7 @@ src/
     level-route.ts        checks levels.ts for mistakes
     checklist-pdf.ts      builds the PDF
     motion.ts             every animation's timing in one place
+public/videos/          the level videos
 public/images/          pictures you add
 ```
 
