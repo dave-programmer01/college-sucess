@@ -10,7 +10,7 @@ import { MediaPlaceholder } from "./illustrations/MediaPlaceholder";
 const frame = "relative aspect-video w-full overflow-hidden rounded-card shadow-card";
 
 type VideoCardProps = {
-  /** videoUrl from levels.ts: a clip in public/videos, a YouTube ID or link, or "" for "Video coming soon". */
+  /** videoUrl from levels.ts: a clip in public/videos or a YouTube ID or link. Anything else shows "Video coming soon". */
   videoUrl: string;
   title: string;
   /** Called when a clip stored with the app plays to the end. */

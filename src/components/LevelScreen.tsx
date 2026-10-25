@@ -55,9 +55,13 @@ export function LevelScreen({ level }: { level: Level }) {
         {details.length > 0 && <p className="mt-1 text-small text-muted">{details.join(" · ")}</p>}
       </div>
 
-      {/* Playing the clip to the end marks the level as watched, the same as the button.
+      {/* A level with no video (videoUrl "") has no video card at all. A video that is
+          set but can't be played still shows the "Video coming soon" card.
+          Playing the clip to the end marks the level as watched, the same as the button.
           Focus stays on the player, so unlike the button it isn't moved to the quiz. */}
-      <VideoCard videoUrl={level.videoUrl} title={level.title} onEnded={() => markWatched(level.id)} />
+      {level.videoUrl.trim() !== "" && (
+        <VideoCard videoUrl={level.videoUrl} title={level.title} onEnded={() => markWatched(level.id)} />
+      )}
       <TakeawayCard takeaways={level.takeaways} />
 
       {watched ? (

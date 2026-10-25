@@ -32,7 +32,7 @@ There are no environment variables and no database. To publish, run the build an
   title: "Know Your New Community",
   chapter: 2,                  // book chapter, or null for none
   duration: "2–4 min",
-  videoUrl: "",                // YouTube ID or link; "" shows "Video coming soon"
+  videoUrl: "",                // clip in public/videos, or YouTube ID or link; "" for no video
   takeaways: ["…", "…"],       // two or three short lines
   quiz: [ { question, options, correctIndex, explanation } ],
   resource: { name, tag, description, location, hours, url, image },
@@ -73,7 +73,7 @@ Use MP4 files (H.264 video, AAC sound), which play in every browser. The clip pl
 
 Pasting the whole link works too, including `youtu.be` share links.
 
-Leave `videoUrl` as `""` to show the "Video coming soon" card.
+Leave `videoUrl` as `""` for a level without a video, like Finish: the level then has no video card at all.
 
 A level is marked as watched when its clip plays to the end. The student can also press "Mark as watched", so a level can always be finished, including with a YouTube video or no video at all. Update `duration` to match the clip, for example `"35 sec"`; it is shown under the level's title. A level without a video doesn't show it.
 
@@ -149,7 +149,7 @@ The drawings are placeholders, each in its own file in [`src/components/illustra
 | --- | --- |
 | `HeroPath.tsx` | Landing page, next to the headline |
 | `Campus.tsx` | Final "You did it!" screen |
-| `MediaPlaceholder.tsx` | "Video coming soon" card, and any resource without a picture |
+| `MediaPlaceholder.tsx` | "Video coming soon" card (a video that is set but can't be played), and any resource without a picture |
 
 To use real artwork, put the image in `public/images/` and replace the drawing where it is used. For the landing page, in [`src/app/page.tsx`](src/app/page.tsx):
 
