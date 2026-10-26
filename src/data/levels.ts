@@ -81,6 +81,7 @@ export const levels: Level[] = [
       "Every student here started as a freshman figuring it out.",
       "Students chose Lehman for its affordability, its location close to home, and recommendations from counselors.",
       "This path walks you through your first year one step at a time.",
+      "Ch 1, Context matters: everyone arrives with a different background, and yours shapes your college experience. Know your context and use it.",
     ],
     quiz: [
       {
@@ -105,6 +106,17 @@ export const levels: Level[] = [
         correctIndex: 0,
         explanation: "Where you start matters less than what you do once you're here.",
       },
+      {
+        question: "Why does your personal context matter in college?",
+        options: [
+          "It doesn't, everyone's experience is the same",
+          "Your background, responsibilities and goals shape what you need from college",
+          "Only your high school grades matter",
+          "Context only matters for graduate students",
+        ],
+        correctIndex: 1,
+        explanation: "Students in the video chose Lehman for different reasons: cost, distance, a counselor's advice. Knowing your own context helps you make better choices.",
+      },
     ],
     resource: {
       name: "Onboarding Advisement Office",
@@ -127,6 +139,7 @@ export const levels: Level[] = [
       "The Student Life Building has a game room and a welcoming community of students.",
       "The library is for more than books: you can study, and some people even nap there.",
       "Joining communities on campus helps you make friends and build stronger bonds.",
+      "Ch 7, Conflict is inevitable: in any community you'll disagree with roommates, group members or professors. Handle it with respect and talk it out early.",
     ],
     quiz: [
       {
@@ -151,6 +164,17 @@ export const levels: Level[] = [
         correctIndex: 2,
         explanation: "Knowing your community means knowing where to find people and resources before you need them.",
       },
+      {
+        question: "Your group project partner isn't doing their part. What's the best first step?",
+        options: [
+          "Do all the work yourself and stay quiet",
+          "Complain about them to the class",
+          "Talk to them directly and respectfully, then involve the professor if needed",
+          "Quit the group",
+        ],
+        correctIndex: 2,
+        explanation: "Conflict is normal. Addressing it early and respectfully usually solves it before it grows.",
+      },
     ],
     resource: {
       name: "Office of Campus Life",
@@ -173,6 +197,7 @@ export const levels: Level[] = [
       "Do all your assignments and readings. They are the core of every class.",
       "If you need help, email your professor. Some will even share their phone number.",
       "Your classmates are a resource too, so reach out to them.",
+      "Ch 9, College is not your opinion: back up your ideas with evidence and sources, not just how you feel.",
     ],
     quiz: [
       {
@@ -196,6 +221,17 @@ export const levels: Level[] = [
         ],
         correctIndex: 0,
         explanation: "Learning takes consistent effort. Assignments and readings are where most of it happens.",
+      },
+      {
+        question: "Your professor asks for an argument in an essay. What makes it college-level?",
+        options: [
+          "Stating your opinion strongly",
+          "Supporting your ideas with evidence and sources",
+          "Making it as long as possible",
+          "Agreeing with the professor",
+        ],
+        correctIndex: 1,
+        explanation: "In college, opinions need support. Evidence is what turns an opinion into an argument.",
       },
     ],
     resource: {
@@ -357,6 +393,7 @@ export const levels: Level[] = [
       "Success can mean being mentally well, staying active, and helping your family.",
       "New passions can show up in college. He found photography and wants to minor in it.",
       "Your idea of success may grow in ways you didn't expect.",
+      "Ch 8, Honesty & authenticity matter: be honest in your work and true to yourself. The student in the interview followed what he actually cares about.",
     ],
     quiz: [
       {
@@ -380,6 +417,17 @@ export const levels: Level[] = [
         ],
         correctIndex: 1,
         explanation: "He learned photography, became really passionate about it, and is open to minoring in it. Success can surprise you.",
+      },
+      {
+        question: "Which choice shows honesty and authenticity in college?",
+        options: [
+          "Copying a friend's homework to save time",
+          "Picking a major only to impress others",
+          "Doing your own work and choosing a path that fits who you are",
+          "Hiding that you're struggling",
+        ],
+        correctIndex: 2,
+        explanation: "Academic honesty protects your learning, and being authentic leads you to a path you'll actually stay on.",
       },
     ],
     resource: {
